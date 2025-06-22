@@ -6,7 +6,7 @@ const {
   removeUser,
   getUser,
   getUsersInRoom,
-} = require("./controller/users");
+} = require("./utils/users");
 
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
@@ -15,17 +15,17 @@ const io = new Server(server);
 
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors()); //allowing all sources
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.send("Hello, Tanishq Tyagi!");
 });
 
 let connections = [];
 let currentRoomId = "";
 
 io.on("connection", (socket) => {
-  connections.push(socket);
+  connections.push(socket); //store the connections in an array
 
   const socketId = socket.id;
   console.log(`${socketId} has connected.`);
@@ -34,9 +34,9 @@ io.on("connection", (socket) => {
     const { name, roomId, userId, host, presenter } = data;
 
     currentRoomId = roomId;
-    const users = addUser({ socketId, ...data });
+    const users = addUser({ socketId, ...data }); // an array of users in the room
 
-    socket.join(roomId);
+    socket.join(roomId); // user joined the room
 
     console.log(`${userId} joined room ${roomId}`);
 
@@ -47,15 +47,17 @@ io.on("connection", (socket) => {
       .emit("userJoinedRoom", { success: true, user: { socketId, ...data } });
   });
 
+  //Pencil
   socket.on("drawPencil", ({ path, strokeColor, roomId }) => {
-    console.log("drawing pencil...");
+    // console.log("drawing pencil...");
     socket
       .to(roomId)
       .emit("onDrawPencil", { path: path, strokeColor: strokeColor });
   });
 
-
+  //Line
   socket.on("drawLine", ({ path, strokeColor, roomId }) => {
+    // console.log("drawing line...");
     socket.to(roomId).emit("onDrawLine", {
       x1: path[0],
       y1: path[1],
@@ -65,7 +67,9 @@ io.on("connection", (socket) => {
     });
   });
 
+  //Rectrangle
   socket.on("drawRect", ({ path, strokeColor, roomId }) => {
+    // console.log("drawing rect...");
     socket.to(roomId).emit("onDrawRect", {
       x1: path[0],
       y1: path[1],
@@ -75,8 +79,9 @@ io.on("connection", (socket) => {
     });
   });
 
-
+  //Eraser
   socket.on("erase", ({ path, roomId }) => {
+    // console.log("Eraser");
     socket.to(roomId).emit("onErase", {
       x1: path[0],
       y1: path[1],
@@ -85,6 +90,7 @@ io.on("connection", (socket) => {
     });
   });
 
+  //handle chat message
   socket.on("message", ({ message, roomId }) => {
     const user = getUser(socketId);
     if (user) {
@@ -92,16 +98,18 @@ io.on("connection", (socket) => {
     }
   });
 
+  //when user leaves
   socket.on("disconnect", () => {
     console.log(`${socketId} is disconnected`);
     const user = getUser(socketId);
     if (user) {
       socket
         .to(currentRoomId)
-        .emit("onDisconnect", { name: user.name, socketId: user.socketId });
+        .emit("onDisconnect", { name: user.name, socketId: user.socketId }); // io.sockets.to().emit() is a bug here
       removeUser(socketId);
     }
 
+    // remove connection from array
     connections = connections.filter((con) => con.id !== socket.id);
   });
 });

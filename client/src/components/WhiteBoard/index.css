@@ -1,0 +1,241 @@
+/* Enhanced Whiteboard Styles */
+
+/* Main container styling */
+.whiteboard-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* Canvas wrapper with enhanced design */
+  .canvas-wrapper {
+    position: relative;
+    margin: 20px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .canvas-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 32px 64px -12px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Canvas styling */
+  canvas {
+    display: block;
+    cursor: crosshair;
+    background: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+    background-size: 20px 20px;
+    transition: cursor 0.2s ease;
+  }
+  
+  /* Tool-specific cursors */
+  .canvas-wrapper[data-tool="pencil"] canvas {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>') 2 20, crosshair;
+  }
+  
+  .canvas-wrapper[data-tool="eraser"] canvas {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/></svg>') 12 12, crosshair;
+  }
+  
+  .canvas-wrapper[data-tool="line"] canvas {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>') 12 12, crosshair;
+  }
+  
+  .canvas-wrapper[data-tool="rect"] canvas {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>') 12 12, crosshair;
+  }
+  
+  /* Animated background elements */
+  .whiteboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .whiteboard-container::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+    animation: shimmer 15s linear infinite;
+    pointer-events: none;
+  }
+  
+  /* Status indicator */
+  .connection-status {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    background: rgba(16, 185, 129, 0.9);
+    color: white;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+    z-index: 1000;
+  }
+  
+  .connection-status::before {
+    content: '●';
+    margin-right: 6px;
+    animation: blink 1.5s infinite;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .canvas-wrapper {
+      margin: 10px;
+      border-radius: 15px;
+    }
+    
+    .connection-status {
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+  }
+  
+  /* Touch feedback for mobile */
+  @media (hover: none) and (pointer: coarse) {
+    .canvas-wrapper {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    canvas {
+      touch-action: none;
+    }
+  }
+  
+  /* Loading state */
+  .canvas-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+  }
+  
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Glassmorphism effect for future UI elements */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .canvas-wrapper {
+      border: 3px solid #000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    canvas {
+      background: #fff;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .canvas-wrapper,
+    .whiteboard-container::before,
+    .whiteboard-container::after,
+    .connection-status {
+      animation: none;
+      transition: none;
+    }
+  }
+  
+  /* Focus styles for accessibility */
+  .canvas-wrapper:focus-within {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+  }
+  
+  /* Print styles */
+  @media print {
+    .whiteboard-container {
+      background: white;
+    }
+    
+    .canvas-wrapper {
+      box-shadow: none;
+      border: 2px solid #000;
+    }
+    
+    .connection-status {
+      display: none;
+    }
+  }
