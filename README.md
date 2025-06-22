@@ -282,3 +282,26 @@ Special thanks to:
   - [Canvas API Documentation](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 
 ## ✍️ About Developers
+Tanishq Tyagi is a passionate Full Stack Developer with expertise in modern web technologies. With a strong foundation in both frontend and backend development, he specializes in creating innovative real-time applications that enhance user collaboration and productivity.
+
+### 🚀 Technical Expertise:
+
+Frontend: React.js, TypeScript, Tailwind CSS, HTML5 Canvas, Next.js
+Backend: Node.js, Express.js, Socket.io, RESTful APIs
+Real-time Technologies: WebSockets, Real-time synchronization, Live collaboration
+Tools & Platforms: Git, GitHub, Vercel, Docker, VS Code
+
+### 🌟 Notable Projects:
+
+DotSlash - A collaborative real-time code editor with integrated terminal and AI copilot
+WhiteSync - Real-time collaborative whiteboard with chat functionality
+Additional projects showcasing expertise in MERN stack and real-time applications
+
+### 🎯 Passion & Vision:
+Tanishq is passionate about building applications that bring people together through technology. He believes in the power of real-time collaboration and strives to create intuitive, seamless experiences that make remote collaboration feel natural and engaging.
+
+### 📫 Get in Touch:
+
+Email: tanishqtyagi45@gmail.com
+LinkedIn: Connect with www.linkedin.com/in/tanishq-tyagi-1b5234289
+GitHub: Follow @tanishq-t
