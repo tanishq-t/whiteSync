@@ -77,7 +77,6 @@ You can view the live preview of the project [here](https://white-sync.vercel.ap
 ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ## ⚙️ Installation
 
@@ -135,25 +134,6 @@ You can view the live preview of the project [here](https://white-sync.vercel.ap
    http://localhost:5173/
    ```
 
-## 🐳 Docker Setup
-
-Alternative setup using Docker:
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/tanishq-t/whiteSync.git
-   cd whiteSync
-   ```
-
-2. **Build and run with Docker Compose:**
-   ```bash
-   docker-compose up --build
-   ```
-
-3. **Access the application:**
-   ```
-   http://localhost:3000/
-   ```
 
 ## 🎨 Usage Guide
 
@@ -303,5 +283,7 @@ Tanishq is passionate about building applications that bring people together thr
 ### 📫 Get in Touch:
 
 Email: tanishqtyagi45@gmail.com
+<br><br/>
 LinkedIn: Connect with www.linkedin.com/in/tanishq-tyagi-1b5234289
+<br><br/>
 GitHub: Follow @tanishq-t
