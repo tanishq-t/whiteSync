@@ -64,6 +64,10 @@ A collaborative, real-time whiteboard where users can seamlessly draw and ideate
 
 You can view the live preview of the project [here](https://white-sync-snowy.vercel.app/).
 
+## 🚀 Videp Tutorial
+
+You can watch the video tutorial of the project [here](https://www.youtube.com/watch?v=qIOVsA3h_y4).
+
 ## 💻 Tech Stack
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
