@@ -6,7 +6,7 @@ const {
   removeUser,
   getUser,
   getUsersInRoom,
-} = require("./utils/users");
+} = require("./controller/users");
 
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
