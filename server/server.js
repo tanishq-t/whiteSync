@@ -11,7 +11,13 @@ const {
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: ["https://white-sync-snowy.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 const port = process.env.PORT || 3000;
 
