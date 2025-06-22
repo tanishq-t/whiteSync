@@ -62,7 +62,7 @@ A collaborative, real-time whiteboard where users can seamlessly draw and ideate
 
 ## 🚀 Live Preview
 
-You can view the live preview of the project [here]().
+You can view the live preview of the project [here](https://white-sync-snowy.vercel.app/).
 
 ## 💻 Tech Stack
 
